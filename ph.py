@@ -14,7 +14,7 @@ def hint(appname):
 	uyari = "\"UYARI !\""
 	mesaj = "\"Yüksek CPU kullanımı tespit edildi \n%s \"" %(appname)
 	komut = "notify-send "+uyari+" "+mesaj+" -t 6000 -i hint" 
-	print komut
+	#print komut
 	os.system(komut)
 
 def check_prc():
@@ -30,7 +30,7 @@ def check_prc():
 		i = i.split(" ")
 		i,name = float(i[2]),str(i[10])
 		if i > YUKSEK:
-			os.system("clear")
+			#os.system("clear")
 			hint(name)
 			#print "%f %s" %(i,name) 
 
