@@ -40,7 +40,7 @@ def main():
 		time.sleep(10)
 	return 0
 
-YUKSEK = 80
+YUKSEK = 90
 
 if __name__ == '__main__':
 	main()
