@@ -14,25 +14,22 @@ def hint(appname):
 	uyari = "\"UYARI !\""
 	mesaj = "\"Yüksek CPU kullanımı tespit edildi \n%s \"" %(appname)
 	komut = "notify-send "+uyari+" "+mesaj+" -t 6000 -i hint" 
-	#print komut
-	os.system(komut)
+	if not appname in EXCEPTS:
+		os.system(komut)
 
 def check_prc():
 	dizi = []
-	cmd = "ps aux"
-	bash_out = subprocess.check_output(cmd,stderr=subprocess.STDOUT,shell=True)
+	bash_out = subprocess.check_output("ps aux",stderr=subprocess.STDOUT,shell=True)
 	satirlar = bash_out.splitlines()
 	for i in satirlar:
 		i = re.sub('([\s]+)', ' ', i)
 		dizi.append(i)
-	dizi.pop(0)
+	dizi.pop(0) # ilk satırı sil
 	for i in dizi:
 		i = i.split(" ")
-		i,name = float(i[2]),str(i[10])
-		if i > YUKSEK:
-			#os.system("clear")
-			hint(name)
-			#print "%f %s" %(i,name) 
+		cpu_usage,name = float(i[2]),str(i[10])
+		if cpu_usage > HIGH:
+			hint(name) 
 
 def main():
 	while 1:
@@ -40,7 +37,8 @@ def main():
 		time.sleep(10)
 	return 0
 
-YUKSEK = 90
+HIGH = 90
+EXCEPTS = ["firefox","chrome","chromium"]
 
 if __name__ == '__main__':
 	main()
