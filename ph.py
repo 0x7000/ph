@@ -38,7 +38,8 @@ def main():
 	return 0
 
 HIGH = 90
-EXCEPTS = ["firefox","chrome","chromium"]
+#tüm tarayıcıların ve javanın .....
+EXCEPTS = ["firefox","chrome","chromium","java"]
 
 if __name__ == '__main__':
 	main()
