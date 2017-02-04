@@ -14,7 +14,7 @@ def hint(appname):
 		appname = appname.strip()
 	#print (appname)
 	uyari = "\"UYARI !\""
-	mesaj = "\"Yüksek CPU kullanımı tespit edildi \n%s \"" %(appname)
+	mesaj = "\"Yüksek CPU kullanımı tespit edildi \n{} \"".format(appname)
 	komut = "notify-send "+uyari+" "+mesaj+" -t 6000 -i hint" 
 	if not appname in EXCEPTS:
 		os.system(komut)
