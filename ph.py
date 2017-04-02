@@ -7,6 +7,7 @@ import threading
 import time
 
 def hint(appname):
+	appname = appname.replace("'","") # ' remove
 	try:
 		appname = appname.split("/")
 		appname = appname[-1]
@@ -15,7 +16,7 @@ def hint(appname):
 	#print (appname)
 	uyari = "\"UYARI !\""
 	mesaj = "\"Yüksek CPU kullanımı tespit edildi \n{} \"".format(appname)
-	komut = "notify-send "+uyari+" "+mesaj+" -t 6000 -i hint" 
+	komut = "notify-send "+uyari+" "+mesaj+" -t 6000 -i hint"
 	if not appname in EXCEPTS:
 		os.system(komut)
 
