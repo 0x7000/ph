@@ -6,7 +6,7 @@ import subprocess
 import threading
 import time
 
-def hint(appname):
+def hint(appname,usage):
 	appname = appname.replace("'","") # ' remove
 	try:
 		appname = appname.split("/")
@@ -15,7 +15,7 @@ def hint(appname):
 		appname = appname.strip()
 	#print (appname)
 	uyari = "\"UYARI !\""
-	mesaj = "\"Yüksek CPU kullanımı tespit edildi \n{} \"".format(appname)
+	mesaj = "\"Yüksek CPU kullanımı tespit edildi \n{} %{} \"".format(appname,usage)
 	komut = "notify-send "+uyari+" "+mesaj+" -t 6000 -i hint"
 	if not appname in EXCEPTS:
 		os.system(komut)
@@ -32,7 +32,7 @@ def check_prc():
 		i = i.split(" ")
 		cpu_usage,name = float(i[2]),str(i[10])
 		if cpu_usage > HIGH:
-			findapp = threading.Thread(target=hint(name))
+			findapp = threading.Thread(target=hint(name,cpu_usage))
 			findapp.start()
 			findapp.join()
 
@@ -43,7 +43,7 @@ def main():
 	return 0
 
 HIGH = 90
-EXCEPTS = ["firefox","chrome","chromium","java","inox"]
+EXCEPTS = ["firefox","chrome","chromium","java","inox","QtWebEngineProcess"]
 
 if __name__ == '__main__':
 	main()
