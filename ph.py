@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''
-GPLv2 lisansıyle dağıtılır
+GPLv3 lisansıyle dağıtılır
 '''
 
 import os
